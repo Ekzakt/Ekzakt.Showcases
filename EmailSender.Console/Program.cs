@@ -20,15 +20,6 @@ var host = Host
     .ConfigureServices((context, services) =>
     {
         services.AddSmtpEmailSender();
-        //services.AddSmtpEmailSender(options =>
-        //{
-        //    options.FromDisplayName = "Console App";
-        //    options.FromAddress = "info@smoothsensation.net";
-        //    options.UserName = "info@smoothsensation.net";
-        //    options.Password = "hTioin_2nB";
-        //    options.Host = "smtp-auth.mailprotect.be";
-        //    options.Port = 587;
-        //});
     })
     .Build();
 
@@ -50,7 +41,9 @@ while (true)
 
     request.Tos.Add(new EmailAddress("mail@ericjansen.com"));
     request.Subject = "Send from Console Application";
-    request.HtmlBody = "<h1>Console Applications</h1>";
+    request.HtmlBody = "<h1>Console Application</h1>";
+    request.HtmlBody += "<p>This email was sent from the EmailSender.Console application.</p>";
+    request.TextBody = "Console Application\n\rThis email was sent from the EmailSender.Console application.";
 
     var result = await _emailService!.SendAsync(request);
 

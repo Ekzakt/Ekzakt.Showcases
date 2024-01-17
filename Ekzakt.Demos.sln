@@ -5,6 +5,12 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailSender.Console", "EmailSender.Console\EmailSender.Console.csproj", "{BFF91524-7A69-499B-845C-10A27F4864DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailTemplateBuilder.Console", "EmailTemplateBuilder.Console\EmailTemplateBuilder.Console.csproj", "{0BB3C425-4E1A-484E-8173-900222EF79FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateBuilder.Core", "..\Ekzakt.EmailTemplateBuilder\Ekzakt.EmailTemplateBuilder.Core\Ekzakt.EmailTemplateBuilder.Core.csproj", "{66F98A68-1CF1-49FE-91FD-3D29AE0814E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateBuilder.IO", "..\Ekzakt.EmailTemplateBuilder\Ekzakt.EmailTemplateBuilder.IO\Ekzakt.EmailTemplateBuilder.IO.csproj", "{00DE71CD-2DB7-4BC9-8A3C-D9E4E2DDFF05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{BFF91524-7A69-499B-845C-10A27F4864DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFF91524-7A69-499B-845C-10A27F4864DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFF91524-7A69-499B-845C-10A27F4864DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BB3C425-4E1A-484E-8173-900222EF79FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB3C425-4E1A-484E-8173-900222EF79FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB3C425-4E1A-484E-8173-900222EF79FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB3C425-4E1A-484E-8173-900222EF79FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66F98A68-1CF1-49FE-91FD-3D29AE0814E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F98A68-1CF1-49FE-91FD-3D29AE0814E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F98A68-1CF1-49FE-91FD-3D29AE0814E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F98A68-1CF1-49FE-91FD-3D29AE0814E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00DE71CD-2DB7-4BC9-8A3C-D9E4E2DDFF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00DE71CD-2DB7-4BC9-8A3C-D9E4E2DDFF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00DE71CD-2DB7-4BC9-8A3C-D9E4E2DDFF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00DE71CD-2DB7-4BC9-8A3C-D9E4E2DDFF05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
