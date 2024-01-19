@@ -22,15 +22,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ekzakt.EmailSender.Smtp" Version="0.0.9" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
-	<!--
 	<ItemGroup>
-		<ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Smtp\Ekzakt.EmailSender.Smtp.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Core\Ekzakt.EmailSender.Core.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Smtp\Ekzakt.EmailSender.Smtp.csproj" />
 	</ItemGroup>
-	-->
-	
+
 </Project>

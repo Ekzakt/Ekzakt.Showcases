@@ -26,9 +26,4 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Ekzakt.EmailTemplateBuilder\Ekzakt.EmailTemplateBuilder.Core\Ekzakt.EmailTemplateBuilder.Core.csproj" />
-		<ProjectReference Include="..\..\Ekzakt.EmailTemplateBuilder\Ekzakt.EmailTemplateBuilder.IO\Ekzakt.EmailTemplateBuilder.IO.csproj" />
-	</ItemGroup>
-
 </Project>

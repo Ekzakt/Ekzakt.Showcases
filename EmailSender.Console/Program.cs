@@ -25,29 +25,34 @@ var host = Host
 
 IEmailSenderService _emailService = host.Services.GetService<IEmailSenderService>();
 
+int counter = 0;
 
 while (true)
 {
-    Console.WriteLine("Send email? (Y)es (N)o");
+    Console.WriteLine("Would you like to send an email? (Y)es (N)o");
     ConsoleKeyInfo yesNo = Console.ReadKey(true);
 
     if (yesNo.Key == ConsoleKey.N)
     {
+        Console.WriteLine();
         Console.WriteLine("Exiting...");
         break;
     }
 
+    counter++;
+
     var request = new SendEmailRequest();
 
     request.Tos.Add(new EmailAddress("mail@ericjansen.com"));
-    request.Subject = "Send from Console Application";
+    request.Subject = $"Nr. {counter}: Send from Console Application";
     request.HtmlBody = "<h1>Console Application</h1>";
     request.HtmlBody += "<p>This email was sent from the EmailSender.Console application.</p>";
     request.TextBody = "Console Application\n\rThis email was sent from the EmailSender.Console application.";
 
     var result = await _emailService!.SendAsync(request);
 
-    Console.WriteLine(result.ServerResponse);
+    Console.WriteLine($"Response {result.ServerResponse}");
+    Console.WriteLine();
 }
 
 
