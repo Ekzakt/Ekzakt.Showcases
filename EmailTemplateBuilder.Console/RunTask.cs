@@ -5,7 +5,9 @@ namespace EmailTemplateProvider.Console;
 
 public class RunTask
 {
+    private ConsoleHelpers c = new();
     private readonly IEmailTemplateProvider _emailProvider;
+
 
     public RunTask(IEmailTemplateProvider emailProvider)
     {
@@ -15,7 +17,7 @@ public class RunTask
 
     public async Task GetTemplate()
     {
-        Clear();
+        c.Clear();
 
         while (true)
         {
@@ -25,104 +27,54 @@ public class RunTask
 
             while (string.IsNullOrEmpty(templateName))
             {
-                System.Console.WriteLine("Enter the name of template you want to build:");
-                templateName = System.Console.ReadLine();
+                c.Write("Enter the name of template you want to build:");
+                templateName = c.ReadLine();
             }
 
 
             while (string.IsNullOrEmpty(language))
             {
-                WriteEmpty("Enter the name of the language in which the template should be built:");
-                language = System.Console.ReadLine();
+                c.Write("Enter the name of the language in which the template should be built:");
+                language = c.ReadLine();
             }
 
 
             try
             {
                 var template = await _emailProvider!.GetTemplateAsync(templateName, language);
-                var jsonString = JsonSerializer.Serialize(template, new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                });
 
-                WriteEmpty("Template build:");
-                WriteEmpty(jsonString);
+                c.WriteResult(c.WriteJson(template));
+
             }
             catch (Exception ex)
             {
-                WriteError(ex);
+                c.WriteError(ex);
             }
 
 
-            WriteLine("Would you like to build another template? (Y)es (N)o");
-            ConsoleKeyInfo yesNo = System.Console.ReadKey(true);
+            if (!c.ConfirmYes("Would you like to build another template?")) break;
 
-            Clear();
-
-            if (yesNo.Key == ConsoleKey.N)
-            {
-                break;
-            }
         }
     }
 
 
     public async Task ListTemplates()
     {
-        Clear();
+        c.Clear();
 
         try
         {
-            WriteEmpty("Getting list of files...");
+            c.Write("Getting list of files...");
 
             var list = await _emailProvider.ListAllFilesAsync();
-            var jsonString = JsonSerializer.Serialize(list, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-
-            WriteLine(jsonString);
+            
+            c.WriteResult(c.WriteJson(list));
 
         }
         catch (Exception ex)
         {
-            WriteError(ex);
+            c.WriteError(ex);
         }
     }
-
-
-
-
-    #region Helpers
-
-    private void WriteEmpty(string? message = "")
-    {
-        System.Console.WriteLine(message);
-    }
-
-
-    private void WriteLine(string? message = "")
-    {
-        WriteLine();
-        System.Console.WriteLine();
-
-    }
-
-
-    private void WriteError(Exception ex)
-    {
-        System.Console.ForegroundColor = ConsoleColor.Red;
-        WriteLine(ex.ToString());
-        System.Console.ForegroundColor = ConsoleColor.White;
-    }
-
-
-    private void Clear()
-    {
-        System.Console.Clear();
-    }
-
-
-    #endregion Helpers
 }
 

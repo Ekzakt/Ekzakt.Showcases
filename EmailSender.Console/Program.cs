@@ -4,6 +4,7 @@ using Ekzakt.EmailSender.Core.Contracts;
 using Ekzakt.EmailSender.Core.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 
 var host = Host
@@ -49,11 +50,18 @@ while (true)
 
     try
     {
-        _ = await _emailService!.SendAsync(request);
+        var result = await _emailService!.SendAsync(request);
+        var jsonResult = JsonSerializer.Serialize(result, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
     }
     catch (Exception ex)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(ex.ToString());
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadKey();
     }
 
     Console.WriteLine();

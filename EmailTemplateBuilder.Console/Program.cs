@@ -4,26 +4,12 @@ using Ekzakt.EmailTemplateProvider.AzureBlob.Configuration;
 using Ekzakt.EmailTemplateProvider.Core.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using EmailTemplateProvider.Console;
-using Microsoft.AspNetCore.Http.Features;
 
+var services = new ServiceCollection();
 
-var host = Host
-    .CreateDefaultBuilder(args)
-    .ConfigureAppConfiguration(config =>
-        config.AddJsonFile(
-            path: "appsettings.Development.json",
-            optional: false,
-            reloadOnChange: true)
-        )
-    .ConfigureServices((context, services) =>
-    {
-        services.AddEmailTemplateProvider();
-    })
-    .Build();
-
+var host = BuildHost(services);
 
 IEmailTemplateProvider _emailProvider = host.Services.GetService<IEmailTemplateProvider>();
-
 
 RunTask tasks = new RunTask(_emailProvider);
 
@@ -61,3 +47,21 @@ while (true)
 }
 
 
+IHost BuildHost(ServiceCollection serviceCollection)
+{
+    var host = Host
+        .CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration(config =>
+            config.AddJsonFile(
+                path: "appsettings.Development.json",
+                optional: false,
+                reloadOnChange: true)
+            )
+        .ConfigureServices((context, services) =>
+        {
+            services.AddEmailTemplateProvider();
+        })
+        .Build();
+
+    return host;
+}
