@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Ekzakt.EmailTemplateProvider.AzureBlob.Configuration;
+using Ekzakt.EmailTemplateProvider.Core.Contracts;
+using Microsoft.Extensions.DependencyInjection;
+using EmailTemplateProvider.Console;
+using Microsoft.AspNetCore.Http.Features;
 
-IServiceCollection services = new ServiceCollection();
-
-//services.AddSmtpEmailSender();
 
 var host = Host
     .CreateDefaultBuilder(args)
@@ -16,47 +17,47 @@ var host = Host
         )
     .ConfigureServices((context, services) =>
     {
-        //services.AddSmtpEmailSender();
+        services.AddEmailTemplateProvider();
     })
     .Build();
 
 
+IEmailTemplateProvider _emailProvider = host.Services.GetService<IEmailTemplateProvider>();
+
+
+RunTask tasks = new RunTask(_emailProvider);
 
 while (true)
 {
-    var templateName = string.Empty;
-    var language = string.Empty;
+    Console.Clear();
+    Console.WriteLine("Which tasks do you want to run?");
+    Console.WriteLine($"A = {nameof(RunTask.GetTemplate)}");
+    Console.WriteLine($"B = {nameof(RunTask.ListTemplates)}");
 
-    while (string.IsNullOrEmpty(templateName))
+    ConsoleKeyInfo key = Console.ReadKey(true);
+    switch (key.Key)
     {
-        Console.WriteLine("Which template would you like to build?");
-        templateName = Console.ReadLine();
+        case ConsoleKey.A:
+            await tasks.GetTemplate(); break;
+        case ConsoleKey.B:
+            await tasks.ListTemplates(); break;
+        default:
+            Console.WriteLine();
+            Console.WriteLine("You chose an invalid option.");
+            Console.WriteLine();
+            break;
     }
 
-    while (string.IsNullOrEmpty(language))
-    { 
-        Console.WriteLine("In which language would you like the template to be built?");
-        language = Console.ReadLine();
-    }
+    Console.WriteLine("Do you want to start again? (Y)es (N)o");
 
-    Console.WriteLine("Build template? (Y)es (N)o");
-    ConsoleKeyInfo yesNo = Console.ReadKey(true);
 
+    ConsoleKeyInfo yesNo = System.Console.ReadKey(true);
     if (yesNo.Key == ConsoleKey.N)
     {
-        Console.WriteLine("Exiting...");
         break;
     }
 
-    Console.WriteLine("Template build:");
-    Console.WriteLine("Response");
-
-    Console.WriteLine("Would you like to build another template?");
-    yesNo = Console.ReadKey(true);
-
-    if (yesNo.Key == ConsoleKey.N)
-    {
-        Console.WriteLine("Exiting...");
-        break;
-    }
+    Console.Clear();
 }
+
+

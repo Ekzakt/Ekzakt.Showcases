@@ -5,9 +5,6 @@ using Ekzakt.EmailSender.Core.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 
-IServiceCollection services = new ServiceCollection();
-
-services.AddSmtpEmailSender();
 
 var host = Host
     .CreateDefaultBuilder(args)
@@ -43,16 +40,24 @@ while (true)
 
     var request = new SendEmailRequest();
 
-    request.Tos.Add(new EmailAddress("mail@ericjansen.com"));
+    request.Tos.Add(new EmailAddress("mail@ericjansen.com", "eric"));
+    request.Tos.Add(new EmailAddress("nickverelst@yahoo.com", "nick"));
     request.Subject = $"Nr. {counter}: Send from Console Application";
-    request.HtmlBody = "<h1>Console Application</h1>";
-    request.HtmlBody += "<p>This email was sent from the EmailSender.Console application.</p>";
-    request.TextBody = "Console Application\n\rThis email was sent from the EmailSender.Console application.";
+    request.Body.Html = "<h1>Console Application</h1>";
+    request.Body.Html += "<p>This email was sent from the EmailSender.Console application.</p>";
+    request.Body.PlainText = "Console Application\n\rThis email was sent from the EmailSender.Console application.";
 
-    var result = await _emailService!.SendAsync(request);
+    try
+    {
+        _ = await _emailService!.SendAsync(request);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.ToString());
+    }
 
-    Console.WriteLine($"Response {result.ServerResponse}");
     Console.WriteLine();
+
 }
 
 

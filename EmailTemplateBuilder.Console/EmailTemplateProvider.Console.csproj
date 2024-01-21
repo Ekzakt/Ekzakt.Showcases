@@ -26,4 +26,8 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.AzureBlob\Ekzakt.EmailTemplateProvider.AzureBlob.csproj" />
+	</ItemGroup>
+
 </Project>
