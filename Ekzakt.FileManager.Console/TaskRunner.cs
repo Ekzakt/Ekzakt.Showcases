@@ -4,7 +4,7 @@ using Ekzakt.Templates.Console.Utilities;
 
 namespace Ekzakt.FileManager.Console
 {
-    public class TaskRunner(ConsoleHelpers? c, AzureBlobFileManager fileManager)
+    public class TaskRunner(ConsoleHelpers? c, IFileManager fileManager)
     {
         public async Task SaveFile()
         {
@@ -15,8 +15,6 @@ namespace Ekzakt.FileManager.Console
                 var result = await fileManager.SaveAsync();
 
                 c.WriteResult(c.WriteJson<IFileResult>(result));
-
-                c.Write($"Doing '{nameof(SaveFile)}'.");
                 c.Write();
 
                 if (!c.ConfirmYesNo("Would you like to try again?")) break;

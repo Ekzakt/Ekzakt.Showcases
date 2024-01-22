@@ -1,5 +1,7 @@
-﻿using Ekzakt.FileManager.AzureBlob.Services;
+﻿using Ekzakt.FileManager.AzureBlob.Configuration;
+using Ekzakt.FileManager.AzureBlob.Services;
 using Ekzakt.FileManager.Console;
+using Ekzakt.FileManager.Core.Contracts;
 using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 var services = new ServiceCollection();
 
 var host = BuildHost(services);
-
 
 var runner = host.Services.GetRequiredService<TaskRunner>();
 var ch = host.Services.GetRequiredService<ConsoleHelpers>();
@@ -55,7 +56,7 @@ IHost BuildHost(ServiceCollection serviceCollection)
         {
             services.AddScoped<TaskRunner>();
             services.AddScoped<ConsoleHelpers>();
-            services.AddScoped<AzureBlobFileManager>();
+            services.AddAzureBlobFileManager();
         })
         .Build();
 
