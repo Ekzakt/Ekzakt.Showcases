@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace EmailTemplateProvider.Console;
 
@@ -64,7 +63,7 @@ public class ConsoleHelpers
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
-    public bool ConfirmYes(string? message = "")
+    public bool ConfirmYesNo(string? message = "")
     {
         while (true)
         {
@@ -107,8 +106,13 @@ public class ConsoleHelpers
     }
 
 
+    /// <summary>
+    /// Reading input from the console.
+    /// </summary>
+    /// <returns></returns>
     public string? ReadLine()
     {
         return System.Console.ReadLine();
     }
+
 }

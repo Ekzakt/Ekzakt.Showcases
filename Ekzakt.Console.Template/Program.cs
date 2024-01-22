@@ -2,14 +2,42 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EmailTemplateProvider.Console;
+using System.Net.Http.Headers;
 
 var services = new ServiceCollection();
+var c = new ConsoleHelpers();
 
 var host = BuildHost(services);
 
 
-RunTask tasks = new RunTask();
+TaskRunner runner = new TaskRunner();
 
+
+List<string> taskList = new()
+{
+    "Do something."
+};
+
+
+
+while (true)
+{
+    var key = runner.WriteTaskList(taskList);
+
+    switch (key.Key)
+    {
+        case ConsoleKey.A:
+            await runner.DoSomething();
+            break;
+        default:
+            break;
+    }
+
+    if (key.Key.Equals(ConsoleKey.Q))
+    {
+        break;
+    }
+}
 
 IHost BuildHost(ServiceCollection serviceCollection)
 {
