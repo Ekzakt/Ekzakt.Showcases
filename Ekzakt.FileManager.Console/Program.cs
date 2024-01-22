@@ -1,32 +1,35 @@
-﻿using EmailTemplateProvider.Console;
+﻿using Ekzakt.FileManager.AzureBlob.Services;
+using Ekzakt.FileManager.Console;
+using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var services = new ServiceCollection();
-var c = new ConsoleHelpers();
 
 var host = BuildHost(services);
 
 
-TaskRunner runner = new TaskRunner();
+var runner = host.Services.GetRequiredService<TaskRunner>();
+var ch = host.Services.GetRequiredService<ConsoleHelpers>();
 
 
 List<string> taskList = new()
 {
-    "Do something."
+    "A save file.",
+    "B delete file.",
+    "C download file."
 };
-
 
 
 while (true)
 {
-    var key = runner.WriteTaskList(taskList);
+    var key = ch.WriteTaskList(taskList);
 
     switch (key.Key)
     {
         case ConsoleKey.A:
-            await runner.DoSomething();
+            await runner.SaveFile();
             break;
         default:
             break;
@@ -50,7 +53,9 @@ IHost BuildHost(ServiceCollection serviceCollection)
             )
         .ConfigureServices((context, services) =>
         {
-            //services.AddSomething();
+            services.AddScoped<TaskRunner>();
+            services.AddScoped<ConsoleHelpers>();
+            services.AddScoped<AzureBlobFileManager>();
         })
         .Build();
 

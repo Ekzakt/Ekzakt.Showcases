@@ -1,50 +1,26 @@
-﻿namespace EmailTemplateProvider.Console
+﻿using Ekzakt.FileManager.AzureBlob.Services;
+using Ekzakt.FileManager.Core.Contracts;
+using Ekzakt.Templates.Console.Utilities;
+
+namespace Ekzakt.FileManager.Console
 {
-    public class TaskRunner
+    public class TaskRunner(ConsoleHelpers? c, AzureBlobFileManager fileManager)
     {
-        private ConsoleHelpers c = new();
-
-        public TaskRunner() { }
-
-        public async Task DoSomething()
+        public async Task SaveFile()
         {
             c.Clear();
 
             while (true)
             {
-                c.Write($"Doing '{nameof(DoSomething)}'.");
+                var result = await fileManager.SaveAsync();
+
+                c.WriteResult(c.WriteJson<IFileResult>(result));
+
+                c.Write($"Doing '{nameof(SaveFile)}'.");
                 c.Write();
 
                 if (!c.ConfirmYesNo("Would you like to try again?")) break;
             }
-        }
-
-
-
-        /// <summary>
-        /// Writes a list of taks prefixed by follow-up letter from the 
-        /// alpabet.  Q is preserved for quitting.
-        /// </summary>
-        /// <param name="taskList"></param>
-        /// <returns></returns>
-        public ConsoleKeyInfo WriteTaskList(List<string> taskList)
-        {
-            var alphabet = "ABCDEFGHIJKLMOPRSTUVWXYZ";
-
-            var counter = 0;
-
-            c.Clear();
-
-            foreach (var task in taskList)
-            {
-                c.Write($"{alphabet.Substring(counter, 1)} = {task}");
-                counter++;
-            };
-
-            c.Write($"{ConsoleKey.Q} = Quit.");
-
-            var output = System.Console.ReadKey(true);
-            return output;
         }
     }
 
