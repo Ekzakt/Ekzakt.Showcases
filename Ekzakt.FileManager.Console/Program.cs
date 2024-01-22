@@ -1,7 +1,5 @@
 ﻿using Ekzakt.FileManager.AzureBlob.Configuration;
-using Ekzakt.FileManager.AzureBlob.Services;
 using Ekzakt.FileManager.Console;
-using Ekzakt.FileManager.Core.Contracts;
 using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +15,9 @@ var ch = host.Services.GetRequiredService<ConsoleHelpers>();
 
 List<string> taskList = new()
 {
-    "A save file.",
-    "B delete file.",
-    "C download file."
+    "Save file.",
+    "Delete file.",
+    "Download file."
 };
 
 

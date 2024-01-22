@@ -10,6 +10,8 @@
 	<ItemGroup>
 		<None Remove="appsettings.Development.json" />
 		<None Remove="appsettings.json" />
+		<None Remove="Files\file01.jpg" />
+		<None Remove="Files\file02.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,6 +26,12 @@
 		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<EmbeddedResource Include="Files\file01.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Files\file02.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
