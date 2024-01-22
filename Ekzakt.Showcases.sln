@@ -19,9 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.EmailTemplateProvide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateProvider.AzureBlob", "..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.AzureBlob\Ekzakt.EmailTemplateProvider.AzureBlob.csproj", "{21C2D344-A0B9-413C-A5AC-7FE1303E5155}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.Console.Templates", "Ekzakt.Console.Templates", "{22E127D0-D5AE-499D-A35C-7D0A68973AB9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.Templates", "Ekzakt.Templates", "{22E127D0-D5AE-499D-A35C-7D0A68973AB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekzakt.Console.Template", "Ekzakt.Console.Template\Ekzakt.Console.Template.csproj", "{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.FileManager", "Ekzakt.FileManager", "{B2AD393D-7149-4E52-A31F-09EED8C7BE8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.FileManager.Core", "..\Ekzakt.FileManager\Ekzakt.FileManager.Core\Ekzakt.FileManager.Core.csproj", "{5FE1C0D4-F112-4A0C-A50F-32893A27EA12}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.FileManager.AzureBlob", "..\Ekzakt.FileManager\Ekzakt.FileManager.AzureBlob\Ekzakt.FileManager.AzureBlob.csproj", "{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.FileManager.Console", "Ekzakt.FileManager.Console\Ekzakt.FileManager.Console.csproj", "{B9A77F41-4EC3-4620-81EB-39D566E4D883}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +59,18 @@ Global
 		{21C2D344-A0B9-413C-A5AC-7FE1303E5155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21C2D344-A0B9-413C-A5AC-7FE1303E5155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21C2D344-A0B9-413C-A5AC-7FE1303E5155}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE1C0D4-F112-4A0C-A50F-32893A27EA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE1C0D4-F112-4A0C-A50F-32893A27EA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE1C0D4-F112-4A0C-A50F-32893A27EA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE1C0D4-F112-4A0C-A50F-32893A27EA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9A77F41-4EC3-4620-81EB-39D566E4D883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9A77F41-4EC3-4620-81EB-39D566E4D883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9A77F41-4EC3-4620-81EB-39D566E4D883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9A77F41-4EC3-4620-81EB-39D566E4D883}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,7 +82,9 @@ Global
 		{EE1F5559-333C-4E76-91B1-12A2BF74C4FC} = {4A703295-4D63-4A4A-ACBD-176F7E01270C}
 		{CB973C81-DE20-413C-B558-97943C617CB3} = {4A703295-4D63-4A4A-ACBD-176F7E01270C}
 		{21C2D344-A0B9-413C-A5AC-7FE1303E5155} = {B406AD9E-CDF2-4D51-99DF-BC70ECB39918}
-		{EDCB61C2-3D49-4624-AB6C-D56C9B636DC0} = {22E127D0-D5AE-499D-A35C-7D0A68973AB9}
+		{5FE1C0D4-F112-4A0C-A50F-32893A27EA12} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
+		{1946954C-B0AE-4E77-AFD7-6C4FEC4C9AF1} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
+		{B9A77F41-4EC3-4620-81EB-39D566E4D883} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0FCCE6-CA4A-45D2-8514-CA8E28F55EAA}

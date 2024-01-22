@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace EmailTemplateProvider.Console;
+namespace Ekzakt.Templates.Console.Utilities;
 
 public class ConsoleHelpers
 {
