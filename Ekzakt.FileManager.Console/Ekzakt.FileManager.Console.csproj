@@ -26,12 +26,6 @@
 		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<EmbeddedResource Include="Files\file01.jpg">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Files\file02.jpg">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,6 +36,11 @@
 	  <Reference Include="Ekzakt.Templates.Console.Utilities">
 	    <HintPath>..\..\Ekzakt.Templates\Ekzakt.Templates.Console.Utilities\bin\Debug\net8.0\Ekzakt.Templates.Console.Utilities.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Files\" />
+	  <Folder Include="Properties\" />
 	</ItemGroup>
 
 </Project>
