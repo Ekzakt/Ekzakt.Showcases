@@ -25,15 +25,20 @@ namespace Ekzakt.AiWriter
                     break;
                 }
 
-                string[] csFiles = Directory.GetFiles(basePath, "*.cs", SearchOption.AllDirectories);
+                List<string> csFiles = Directory.GetFiles(basePath, "*.cs", SearchOption.AllDirectories).ToList();
+
+                var count = csFiles.RemoveAll(x => x.EndsWith(".g.cs"));
+                count += csFiles.RemoveAll(x => x.EndsWith(".AssemblyInfo.cs"));
+                count += csFiles.RemoveAll(x => x.EndsWith(".AssemblyAttributes.cs"));
+
 
                 Console.WriteLine("List of .cs files:");
-                foreach(var file in csFiles)
+                foreach (var file in csFiles)
                 {
                     c.Write(file.Trim());
                 }
 
-                if (!c.ConfirmYesNo("Continue aggregating?"))
+                if (!c.ConfirmYesNo( $"Continue aggregating {csFiles?.Count ?? 0} files?"))
                 {
                     break;
                 }

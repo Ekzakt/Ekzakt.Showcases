@@ -1,9 +1,12 @@
 ﻿using Ekzakt.EmailSender.Console;
 using Ekzakt.EmailSender.Smtp.Configuration;
+using Ekzakt.EmailTemplateProvider.Core.Contracts;
 using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ekzakt.FileManager.AzureBlob.Configuration;
+using Ekzakt.EmailTemplateProvider.Io.Services;
 
 var services = new ServiceCollection();
 
@@ -52,7 +55,10 @@ IHost BuildHost(ServiceCollection serviceCollection)
         {
             services.AddScoped<TaskRunner>();
             services.AddScoped<ConsoleHelpers>();
+
             services.AddSmtpEmailSender();
+            services.AddAzureBlobFileManager();
+            services.AddScoped<IEmailTemplateProvider, IoEmailTemplateProvider>();
         })
         .Build();
 

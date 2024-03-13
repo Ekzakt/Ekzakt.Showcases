@@ -21,8 +21,9 @@ List<string> taskList =
     "Save file in chunks.",
     "Save file using stream.",
     "List files.",
-    "Download file.",
-    "Delete file."
+    "Download SasToken for file.",
+    "Delete file.",
+    "Read file as string."
 ];
 
 
@@ -42,13 +43,16 @@ while (true)
             await runner.SaveFileAsync(false, true);
             break;
         case ConsoleKey.D:
-            await runner.ListFiles();
+            await runner.ListFilesAsync();
             break;
         case ConsoleKey.E:
-            runner.DownloadFile();
+            await runner.DownloadFileAsync();
             break;
         case ConsoleKey.F:
-            await runner.DeleteFile();
+            await runner.DeleteFileAsync();
+            break;
+        case ConsoleKey.G:
+            await runner.ReadFileAsStringAsync();
             break;
         default:
             break;

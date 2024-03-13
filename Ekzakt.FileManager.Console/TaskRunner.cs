@@ -81,13 +81,33 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
     }
 
 
-    public async Task ListFiles()
+    public async Task ListFilesAsync()
     {
         while (true)
         {
+            c.Clear();
+
+            var pathsString = string.Empty;
+
+            while (string.IsNullOrEmpty(pathsString))
+            {
+                c.Write("Which path(s) do you want to download? Separate multiple paths by a semicolon (;).");
+                c.Write("Type a dash (-) to list all files.");
+
+                pathsString = c.ReadLine();
+            }
+
+            var pathsList = new List<string>();
+
+            if (!string.IsNullOrEmpty(pathsString) && !pathsString.Equals("-", StringComparison.OrdinalIgnoreCase))
+            {
+                pathsList.AddRange(pathsString.Split(";"));
+            }
+
             var request = new ListFilesRequest
             {
-                BlobContainerName = "demo-blazor8"
+                BaseLocation = "demo-blazor8",
+                Paths = pathsList
             };
 
             var result = await fileManager.ListFilesAsync(request);
@@ -109,7 +129,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
     }
 
 
-    public async Task DownloadFile()
+    public async Task DownloadFileAsync()
     {
         while (true)
         {
@@ -122,13 +142,13 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
             }
 
 
-            var request = new DownloadFileRequest
+            var request = new DownloadSasTokenRequest
             {
-                BlobContainerName = "demo-blazor8",
+                BaseLocation = "demo-blazor8",
                 FileName = fileName
             };
 
-            var result = await fileManager.DownloadFileAsync(request);
+            var result = await fileManager.DownloadSasTokenAsync(request);
 
             if (result.IsSuccess())
             {
@@ -148,7 +168,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
     }
 
 
-    public async Task DeleteFile()
+    public async Task DeleteFileAsync()
     {
         while (true)
         {
@@ -163,12 +183,52 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new DeleteFileRequest
             {
-                BlobContainerName = "demo-blazor8",
+                BaseLocation = "demo-blazor8",
                 FileName = fileName
             };
 
 
             var result = await fileManager.DeleteFileAsync(request);
+
+            if (result.IsSuccess())
+            {
+                c.WriteSuccess(result);
+            }
+            else
+            {
+                c.WriteError(result);
+            }
+
+
+            if (!c.ConfirmYesNo("Do you want to try again?"))
+            {
+                break;
+            }
+        }
+    }
+
+
+    public async Task ReadFileAsStringAsync()
+    {
+        while (true)
+        {
+            var fileName = string.Empty;
+
+            while (string.IsNullOrEmpty(fileName))
+            {
+                c.Write("Which file do you want to read?");
+                fileName = c.ReadLine();
+            }
+
+
+            var request = new ReadFileAsStringRequest
+            {
+                BaseLocation = "demo-blazor8",
+                FileName = fileName
+            };
+
+
+            var result = await fileManager.ReadFileStringAsync(request);
 
             if (result.IsSuccess())
             {
@@ -198,7 +258,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
         var request = new SaveFileRequest
         {
-            BlobContainerName = containerName,
+            BaseLocation = containerName,
             FileName = fileName,
             FileStream = fileStream,
             InitialFileSize = fileStream.Length,
@@ -240,7 +300,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new SaveFileChunkedRequest
             {
-                BlobContainerName = containerName,
+                BaseLocation = containerName,
                 FileName = fileName,
                 InitialFileSize = totalBytes,
                 ChunkData = Convert.ToBase64String(chunk),

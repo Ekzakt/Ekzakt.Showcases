@@ -22,12 +22,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Ekzakt.FileManager.AzureBlob" Version="0.0.25" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.AzureBlob\Ekzakt.EmailTemplateProvider.AzureBlob.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Core\Ekzakt.EmailTemplateProvider.Core.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Io\Ekzakt.EmailTemplateProvider.Io.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Reference Include="Ekzakt.Templates.Console.Utilities">
+			<HintPath>..\..\Ekzakt.Templates\Ekzakt.Templates.Console.Utilities\bin\Debug\net8.0\Ekzakt.Templates.Console.Utilities.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	
 </Project>

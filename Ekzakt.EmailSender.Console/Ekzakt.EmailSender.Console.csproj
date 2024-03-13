@@ -29,6 +29,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Core\Ekzakt.EmailSender.Core.csproj" />
 	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Smtp\Ekzakt.EmailSender.Smtp.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Core\Ekzakt.EmailTemplateProvider.Core.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Io\Ekzakt.EmailTemplateProvider.Io.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.FileManager\Ekzakt.FileManager.AzureBlob\Ekzakt.FileManager.AzureBlob.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
