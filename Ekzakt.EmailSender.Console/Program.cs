@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ekzakt.FileManager.AzureBlob.Configuration;
 using Ekzakt.EmailTemplateProvider.Io.Services;
+using Microsoft.Extensions.Azure;
+using Azure.Identity;
+using Ekzakt.FileManager.Core.Options;
+using Ekzakt.EmailTemplateProvider.Io.Configuration;
 
 var services = new ServiceCollection();
 
@@ -56,8 +60,18 @@ IHost BuildHost(ServiceCollection serviceCollection)
             services.AddScoped<TaskRunner>();
             services.AddScoped<ConsoleHelpers>();
 
+            services
+               .AddAzureClients(clientBuilder => {
+                   clientBuilder
+                       .UseCredential(new DefaultAzureCredential());
+                   clientBuilder
+                       .AddBlobServiceClient(context.Configuration.GetSection(FileManagerOptions.SectionName).GetSection(AzureStorageOptions.SectionName));
+               });
+
             services.AddSmtpEmailSender();
             services.AddAzureBlobFileManager();
+            services.AddEmailTemplateProviderIo();
+
             services.AddScoped<IEmailTemplateProvider, IoEmailTemplateProvider>();
         })
         .Build();

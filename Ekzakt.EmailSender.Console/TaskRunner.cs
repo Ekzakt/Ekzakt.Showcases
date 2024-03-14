@@ -1,13 +1,17 @@
 ﻿using Ekzakt.EmailSender.Core.Contracts;
 using Ekzakt.EmailSender.Core.EventArguments;
 using Ekzakt.EmailSender.Core.Models;
+using Ekzakt.EmailTemplateProvider.Core.Contracts;
+using Ekzakt.EmailTemplateProvider.Core.Models;
+using Ekzakt.EmailTemplateProvider.Core.Requests;
 using Ekzakt.Templates.Console.Utilities;
 
 namespace Ekzakt.EmailSender.Console;
 
 public class TaskRunner(
     ConsoleHelpers c, 
-    IEmailSenderService emailSenderService) : IDisposable
+    IEmailSenderService emailSenderService,
+    IEmailTemplateProvider templateProvider) : IDisposable
 {
     public async Task SendEmailAsync()
     {
@@ -22,33 +26,47 @@ public class TaskRunner(
         {
             c.Write($"Executing '{nameof(SendEmailAsync)}'...");
 
-            counter++;
-
-            var request = new SendEmailRequest();
-
-            request.Tos.Add(new EmailAddress("mail@ericjansen.com", "Eric"));
-            request.Tos.Add(new EmailAddress("mail@johndoe.com", "John"));
-            request.Subject = $"Nr. {counter}: Send from Console Application";
-            request.Body.Html = "<h1>Console Application</h1>";
-            request.Body.Html += "<p>This email was sent from the EmailSender.Console application.</p>";
-            request.Body.PlainText = "Console Application\n\rThis email was sent from the EmailSender.Console application.";
-
-            try
+            var templatesResponse = await templateProvider.GetTemplateAsync(new EmailTemplateRequest
             {
-                var result = await emailSenderService!.SendAsync(request);
+                CultureName = "en-us",
+                TemplateName = "sample"
+            });
 
-                if (result.IsSuccess)
-                {
-                    c.WriteSuccess(result);
-                }
-                else
-                {
-                    c.WriteError(result);
-                }
+            var templates = templatesResponse.Templates;
+
+            if (!templatesResponse.IsSuccess)
+            {
+                c.WriteError(templatesResponse);
             }
-            catch (Exception ex)
-            {
-                c.WriteError(ex.ToString());
+            
+            foreach (var template in templates ?? new List<EmailTemplate>())
+            { 
+                counter++;
+
+                var request = new SendEmailRequest();
+
+                request.Tos.Add(new Core.Models.EmailAddress("mail@ericjansen.com", "Eric"));
+                request.Subject = template.Subject;
+                request.Body.Html = template.Body.Html;
+                request.Body.Text = template.Body.Text;
+
+                try
+                {
+                    var result = await emailSenderService!.SendAsync(request);
+
+                    if (result.IsSuccess)
+                    {
+                        c.WriteSuccess(result);
+                    }
+                    else
+                    {
+                        c.WriteError(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    c.WriteError(ex.ToString());
+                }
             }
 
             if (!c.ConfirmYesNo("Would you like to try again?")) break;

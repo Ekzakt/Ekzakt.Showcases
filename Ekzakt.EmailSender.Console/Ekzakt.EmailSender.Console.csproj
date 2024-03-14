@@ -32,6 +32,7 @@
 	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Core\Ekzakt.EmailTemplateProvider.Core.csproj" />
 	  <ProjectReference Include="..\..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Io\Ekzakt.EmailTemplateProvider.Io.csproj" />
 	  <ProjectReference Include="..\..\Ekzakt.FileManager\Ekzakt.FileManager.AzureBlob\Ekzakt.FileManager.AzureBlob.csproj" />
+	  <ProjectReference Include="..\..\Ekzakt.FileManager\Ekzakt.FileManager.Core.Models\Ekzakt.FileManager.Core.Models.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
