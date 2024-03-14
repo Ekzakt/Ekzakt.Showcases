@@ -1,6 +1,6 @@
 ﻿using Ekzakt.Templates.Console.Utilities;
 
-namespace Ekzakt.AiWriter
+namespace Ekzakt.AiCodeAggregator
 {
     public class TaskRunner(ConsoleHelpers c)
     {

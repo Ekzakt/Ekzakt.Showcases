@@ -23,15 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.FileManager.Console"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateProvider.Console", "Ekzakt.EmailTemplateProvider.Console\Ekzakt.EmailTemplateProvider.Console.csproj", "{E3CEDBD4-B3F0-4727-82BA-9C1667CFEA39}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.AiAggregator", "Ekzakt.AiAggregator", "{52B4A601-0BF5-4B65-BB40-B572A3B4DAEA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.AiAggregator", "Ekzakt.AiAgregator\Ekzakt.AiAggregator.csproj", "{7D50AD52-A236-4D2F-A1AB-C65208D096BC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ekzakt.AiCodeAggregator", "Ekzakt.AiCodeAggregator", "{52B4A601-0BF5-4B65-BB40-B572A3B4DAEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.FileManager.Core.Models", "..\Ekzakt.FileManager\Ekzakt.FileManager.Core.Models\Ekzakt.FileManager.Core.Models.csproj", "{47123C5C-6DD6-4C09-A1B9-00CAC486B5FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailSender.Console", "Ekzakt.EmailSender.Console\Ekzakt.EmailSender.Console.csproj", "{F07582FE-5E48-4009-939B-8D8F270034E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateProvider.Io", "..\Ekzakt.EmailTemplateProvider\Ekzakt.EmailTemplateProvider.Io\Ekzakt.EmailTemplateProvider.Io.csproj", "{E485F7C5-44F8-41E5-92DD-6FB4D55CF950}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.AiCodeAggregator", "Ekzakt.AiCodeAggregator\Ekzakt.AiCodeAggregator.csproj", "{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +67,6 @@ Global
 		{E3CEDBD4-B3F0-4727-82BA-9C1667CFEA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3CEDBD4-B3F0-4727-82BA-9C1667CFEA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3CEDBD4-B3F0-4727-82BA-9C1667CFEA39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D50AD52-A236-4D2F-A1AB-C65208D096BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D50AD52-A236-4D2F-A1AB-C65208D096BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D50AD52-A236-4D2F-A1AB-C65208D096BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D50AD52-A236-4D2F-A1AB-C65208D096BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{47123C5C-6DD6-4C09-A1B9-00CAC486B5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47123C5C-6DD6-4C09-A1B9-00CAC486B5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47123C5C-6DD6-4C09-A1B9-00CAC486B5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,6 +79,10 @@ Global
 		{E485F7C5-44F8-41E5-92DD-6FB4D55CF950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E485F7C5-44F8-41E5-92DD-6FB4D55CF950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E485F7C5-44F8-41E5-92DD-6FB4D55CF950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,10 +95,10 @@ Global
 		{1C28CDC0-02E5-4CF2-BF15-6D91E1069222} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
 		{62A264AC-8CA9-4989-B271-6551319AFA69} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
 		{E3CEDBD4-B3F0-4727-82BA-9C1667CFEA39} = {B406AD9E-CDF2-4D51-99DF-BC70ECB39918}
-		{7D50AD52-A236-4D2F-A1AB-C65208D096BC} = {52B4A601-0BF5-4B65-BB40-B572A3B4DAEA}
 		{47123C5C-6DD6-4C09-A1B9-00CAC486B5FB} = {B2AD393D-7149-4E52-A31F-09EED8C7BE8E}
 		{F07582FE-5E48-4009-939B-8D8F270034E9} = {4A703295-4D63-4A4A-ACBD-176F7E01270C}
 		{E485F7C5-44F8-41E5-92DD-6FB4D55CF950} = {B406AD9E-CDF2-4D51-99DF-BC70ECB39918}
+		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46} = {52B4A601-0BF5-4B65-BB40-B572A3B4DAEA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0FCCE6-CA4A-45D2-8514-CA8E28F55EAA}

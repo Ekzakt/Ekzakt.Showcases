@@ -1,4 +1,4 @@
-﻿using Ekzakt.AiWriter;
+﻿using Ekzakt.AiCodeAggregator;
 using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
