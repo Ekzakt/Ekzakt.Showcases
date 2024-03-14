@@ -6,7 +6,7 @@ This repository contains projects for quickly testing class libraries written fo
 
 Most of these projects are Visual Studio Console projects and use the template console project you can find [here](https://github.com/Ekzakt/Ekzakt.Templates/tree/master/Ekzakt.Templates.Console). 
 
-Individual descriptions and the dependencies these projects use can be found in the README file in each project.
+Individual descriptions and the dependencies these projects use can be found in their README file.
 
 
 ## License
