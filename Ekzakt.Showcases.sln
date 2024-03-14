@@ -33,6 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailTemplateProvide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.AiCodeAggregator", "Ekzakt.AiCodeAggregator\Ekzakt.AiCodeAggregator.csproj", "{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF20C841-7478-4679-AC2D-D917A6F7A855}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
