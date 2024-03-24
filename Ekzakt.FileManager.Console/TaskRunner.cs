@@ -3,6 +3,8 @@ using Ekzakt.FileManager.Core.Models;
 using Ekzakt.FileManager.Core.Models.Requests;
 using Ekzakt.FileManager.Core.Models.Responses;
 using Ekzakt.Templates.Console.Utilities;
+using Ekzakt.Utilities.Extensions;
+using Ekzakt.Utilities.Helpers;
 using System.Net;
 
 namespace Ekzakt.FileManager.Console;
@@ -16,33 +18,35 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
             c.Write($"Uploading file {progress.FileName}: {(int)progress.PercentageDone} % done.");
         });
 
+        var basePath = @"C:\Users\EricJansen\source\repos\Ekzakt\Ekzakt.Showcases\Ekzakt.FileManager.Console\Files";
 
         while (true)
         {
-            var menu = new List<string>()
-            {
-                "file01.jpg",
-                "file02.jpg",
-                "file03.jpg",
-                "video01.mp4",
-                "video02.mov"
-            };
-            
-            var key = c.WriteMenu(menu);
 
-            var sourceFile = key.Key switch
-            {
-                ConsoleKey.A => "file01.jpg",
-                ConsoleKey.B => "file02.jpg",
-                ConsoleKey.C => "file03.jpg",
-                ConsoleKey.D => "video01.mp4",
-                ConsoleKey.E => "video02.mov",
-                _ => "file01.jpg"
-            };
+            var fileList = new List<string>();
 
-            if (key.Key == ConsoleKey.Escape)
+            foreach (var file in Directory.GetFiles(basePath, "*.*", SearchOption.TopDirectoryOnly).ToList())
             {
-                break;
+                var info = new FileInfo(file);
+
+                fileList.Add($"{info.Name} - {info.Length.FormatFileSize(0)}");
+            }
+
+            var fileKeyMap = BuildFileKeyMap(fileList);
+            var key = c.WriteMenu(fileList);
+            var sourceFile = string.Empty;
+
+            while(string.IsNullOrEmpty(sourceFile))
+            {
+                if (fileKeyMap.TryGetValue(key.Key, out string? source))
+                {
+                    sourceFile = source.Split('-')[0];
+                }
+
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
             }
 
             var fileName = string.Empty;
@@ -53,7 +57,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
                 fileName = c.ReadLine();
             }
 
-            var basePath = @"C:\Users\EricJansen\source\repos\Ekzakt\Ekzakt.Showcases\Ekzakt.FileManager.Console\Files";
+
             var containerName = "demo-blazor8";
             var path = Path.Combine(basePath, sourceFile);
 
@@ -252,7 +256,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
     #region Helpers
 
-    internal async Task SaveFileAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
+    private async Task SaveFileAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
     {
         using FileStream fileStream = File.OpenRead(path);
 
@@ -278,7 +282,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
     }
 
 
-    internal async Task SaveFileChunkedAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
+    private async Task SaveFileChunkedAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
     {
         const long CHUNK_SIZE = (1024 * 1024) * 1;
 
@@ -335,7 +339,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
 
     // TODO: Fix this!
-    internal async Task SaveFileStreamAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
+    private async Task SaveFileStreamAsync(string path, string fileName, string containerName, Progress<ProgressEventArgs> progressHandler)
     {
         await using (var fileStream = File.OpenRead(path))
 
@@ -345,6 +349,30 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
         formData.Add(fileContent, "files", $"{Guid.NewGuid()}.jpg");
     }
 
+
+    private Dictionary<ConsoleKey, string> BuildFileKeyMap(List<string> fileList)
+    {
+        //Dictionary<string, ConsoleKey> fileKeyMap = [];
+        Dictionary<ConsoleKey, string> fileKeyMap = [];
+
+
+        ConsoleKey currentKey = ConsoleKey.A;
+
+        foreach (var file in fileList)
+        {
+            //fileKeyMap[file] = currentKey;
+            fileKeyMap[currentKey] = file;
+
+            currentKey++;
+
+            if (currentKey > ConsoleKey.Z)
+            { 
+                currentKey = ConsoleKey.A;
+            }
+        }
+
+        return fileKeyMap;
+    }
     #endregion Helpers
 
 }

@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekzakt.EmailSender.Core.Models", "..\Ekzakt.EmailSender\Ekzakt.EmailSender.Core.Models\Ekzakt.EmailSender.Core.Models.csproj", "{071EA75E-D0E2-4D31-9212-01068A4BC262}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071EA75E-D0E2-4D31-9212-01068A4BC262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071EA75E-D0E2-4D31-9212-01068A4BC262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071EA75E-D0E2-4D31-9212-01068A4BC262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071EA75E-D0E2-4D31-9212-01068A4BC262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{F07582FE-5E48-4009-939B-8D8F270034E9} = {4A703295-4D63-4A4A-ACBD-176F7E01270C}
 		{E485F7C5-44F8-41E5-92DD-6FB4D55CF950} = {B406AD9E-CDF2-4D51-99DF-BC70ECB39918}
 		{EBAE72D3-E52D-4DB3-BCE7-FD91541F1F46} = {52B4A601-0BF5-4B65-BB40-B572A3B4DAEA}
+		{071EA75E-D0E2-4D31-9212-01068A4BC262} = {4A703295-4D63-4A4A-ACBD-176F7E01270C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0FCCE6-CA4A-45D2-8514-CA8E28F55EAA}

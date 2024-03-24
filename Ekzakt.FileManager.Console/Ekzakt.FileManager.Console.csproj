@@ -10,8 +10,6 @@
 	<ItemGroup>
 		<None Remove="appsettings.Development.json" />
 		<None Remove="appsettings.json" />
-		<None Remove="Files\file01.jpg" />
-		<None Remove="Files\file02.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -39,8 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Files\" />
-	  <Folder Include="Properties\" />
+		<Folder Include="Properties\" />
 	</ItemGroup>
 
 </Project>

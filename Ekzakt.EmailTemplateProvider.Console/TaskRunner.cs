@@ -6,7 +6,7 @@ namespace Ekzakt.EmailTemplateProvider.Console;
 
 public class TaskRunner(
     ConsoleHelpers c,
-    IEmailTemplateProvider templateProvider)
+    IEkzaktEmailTemplateProvider templateProvider)
 {
     public async Task GetEmailTemplateAsync()
     {

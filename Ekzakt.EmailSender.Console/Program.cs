@@ -65,14 +65,14 @@ IHost BuildHost(ServiceCollection serviceCollection)
                    clientBuilder
                        .UseCredential(new DefaultAzureCredential());
                    clientBuilder
-                       .AddBlobServiceClient(context.Configuration.GetSection(FileManagerOptions.SectionName).GetSection(AzureStorageOptions.SectionName));
+                       .AddBlobServiceClient(context.Configuration.GetSection(FileManagerOptions.SectionName).GetSection(AzureStorageBlobsOptions.SectionName));
                });
 
-            services.AddSmtpEmailSender();
+            services.AddEkzaktSmtpEmailSender();
             services.AddAzureBlobFileManager();
-            services.AddEmailTemplateProviderIo();
+            services.AddEkzaktEmailTemplateProviderIo();
 
-            services.AddScoped<IEmailTemplateProvider, IoEmailTemplateProvider>();
+            services.AddScoped<IEkzaktEmailTemplateProvider, EkzaktEmailTemplateProviderIo>();
         })
         .Build();
 

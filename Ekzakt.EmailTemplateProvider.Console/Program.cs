@@ -70,7 +70,7 @@ IHost BuildHost(ServiceCollection serviceCollection)
                });
 
             services.AddAzureBlobFileManager();
-            services.AddEmailTemplateProviderIo();
+            services.AddEkzaktEmailTemplateProviderIo();
         })
         .Build();
 

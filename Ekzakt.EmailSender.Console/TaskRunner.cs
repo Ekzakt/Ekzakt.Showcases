@@ -1,17 +1,18 @@
 ﻿using Ekzakt.EmailSender.Core.Contracts;
 using Ekzakt.EmailSender.Core.EventArguments;
-using Ekzakt.EmailSender.Core.Models;
+using Ekzakt.EmailSender.Core.Models.Requests;
 using Ekzakt.EmailTemplateProvider.Core.Contracts;
 using Ekzakt.EmailTemplateProvider.Core.Models;
 using Ekzakt.EmailTemplateProvider.Core.Requests;
 using Ekzakt.Templates.Console.Utilities;
+using System.Text.Json;
 
 namespace Ekzakt.EmailSender.Console;
 
 public class TaskRunner(
     ConsoleHelpers c, 
-    IEmailSenderService emailSenderService,
-    IEmailTemplateProvider templateProvider) : IDisposable
+    IEkzaktEmailSenderService emailSenderService,
+    IEkzaktEmailTemplateProvider templateProvider) : IDisposable
 {
     public async Task SendEmailAsync()
     {
@@ -45,10 +46,18 @@ public class TaskRunner(
 
                 var request = new SendEmailRequest();
 
-                request.Tos.Add(new Core.Models.EmailAddress("mail@ericjansen.com", "Eric"));
-                request.Subject = template.Subject;
-                request.Body.Html = template.Body.Html;
-                request.Body.Text = template.Body.Text;
+                request.TemplateName = "Contact";
+                request.RecipientType = "User";
+
+                request.Email.Tos.Add(new Core.Models.EmailAddress("mail@ericjansen.com", "Eric"));
+                request.Email.Subject = template.Subject;
+                request.Email.Body.Html = template.Body.Html;
+                request.Email.Body.Text = template.Body.Text;
+
+                var templateString = JsonSerializer.Serialize(template, new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                });
 
                 try
                 {

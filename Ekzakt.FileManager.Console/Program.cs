@@ -92,7 +92,7 @@ IHost BuildHost(ServiceCollection serviceCollection)
                     clientBuilder
                         .UseCredential(new DefaultAzureCredential());
                     clientBuilder
-                        .AddBlobServiceClient(context.Configuration.GetSection(FileManagerOptions.SectionName).GetSection(AzureStorageOptions.SectionName));
+                        .AddBlobServiceClient(context.Configuration.GetSection(AzureStorageBlobsOptions.SectionName));
                     clientBuilder
                         .ConfigureDefaults(context.Configuration.GetSection("Azure:Defaults"));
                 });

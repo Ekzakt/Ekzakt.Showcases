@@ -43,7 +43,7 @@ namespace Ekzakt.AiCodeAggregator
                     break;
                 }
 
-                foreach (string csFile in csFiles)
+                foreach (string csFile in csFiles ?? [])
                 {
                     var fileText = File.ReadAllText(csFile);
                     var dest = Path.Combine(basePath, "Aggregator.txt");
