@@ -1,5 +1,4 @@
-﻿using Ekzakt.EmailSender.Console;
-using Ekzakt.EmailSender.Smtp.Configuration;
+﻿using Ekzakt.Queuing.Console;
 using Ekzakt.Templates.Console.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,13 +8,14 @@ var services = new ServiceCollection();
 
 var host = BuildHost(services);
 
+
 var runner = host.Services.GetRequiredService<TaskRunner>();
 var ch = host.Services.GetRequiredService<ConsoleHelpers>();
 
 
 List<string> taskList = new()
 {
-    "Send an e-mail."
+    "Do something."
 };
 
 
@@ -26,7 +26,7 @@ while (true)
     switch (key.Key)
     {
         case ConsoleKey.A:
-            await runner.SendEmailAsync();
+            await runner.DoSomethingAsync();
             break;
         default:
             break;
@@ -52,9 +52,6 @@ IHost BuildHost(ServiceCollection serviceCollection)
         {
             services.AddScoped<TaskRunner>();
             services.AddScoped<ConsoleHelpers>();
-
-            services.AddEkzaktEmailSenderSmtp();
-
         })
         .Build();
 

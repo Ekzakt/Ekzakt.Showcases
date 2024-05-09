@@ -1,6 +1,9 @@
-﻿using Ekzakt.EmailTemplateProvider.Core.Contracts;
+﻿using Ekzakt.EmailTemplateProvider.Core;
+using Ekzakt.EmailTemplateProvider.Core.Contracts;
+using Ekzakt.EmailTemplateProvider.Core.Extensions;
 using Ekzakt.EmailTemplateProvider.Core.Requests;
 using Ekzakt.Templates.Console.Utilities;
+using Ekzakt.Utilities;
 
 namespace Ekzakt.EmailTemplateProvider.Console;
 
@@ -17,13 +20,11 @@ public class TaskRunner(
             var templateName = string.Empty;
             var cultureName = string.Empty;
 
-
             while (string.IsNullOrEmpty(templateName))
             {
                 c.Write("Enter the name of template you want to build:");
                 templateName = c.ReadLine();
             }
-
 
             while (string.IsNullOrEmpty(cultureName))
             {
@@ -31,22 +32,29 @@ public class TaskRunner(
                 cultureName = c.ReadLine();
             }
 
-
             try
             {
-                var result = await templateProvider!.GetTemplateAsync(new EmailTemplateRequest
+                var request = new EmailTemplateRequest
                 {
                     TemplateName = templateName,
                     CultureName = cultureName
-                });
+                };
 
-                if (result.IsSuccess)
+                var result = await templateProvider!.GetEmailTemplateAsync(request);
+                
+                if (result is not null && result.IsSuccess)
                 {
-                    c.WriteSuccess(result);
+                    var stringReplacer = new StringReplacer();
+                    stringReplacer.AddReplacement("IpAddress", "\"****************___MyAddedIpAddress___\"****************");
+                    stringReplacer.AddReplacement("ContactName", "****************___Rixke___****************");
+
+                    var x = result!.EmailTemplateInfo!.ApplyReplacements(stringReplacer);
+
+                    c.WriteSuccess(x);
                 }
                 else
                 { 
-                    c.WriteError(result);
+                    c.WriteError(false.ToString());
                 }
 
             }
@@ -55,13 +63,10 @@ public class TaskRunner(
                 c.WriteError(ex.ToString());
             }
 
-
             if (!c.ConfirmYesNo("Would you like to build another template?")) break;
 
         }
     }
-
-
 
 
     #region Helpers

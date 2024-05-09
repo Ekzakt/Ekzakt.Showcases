@@ -97,7 +97,7 @@ IHost BuildHost(ServiceCollection serviceCollection)
                         .ConfigureDefaults(context.Configuration.GetSection("Azure:Defaults"));
                 });
 
-            services.AddAzureBlobFileManager();
+            services.AddEkzaktFileManagerAzure();
 
         })
         .Build();

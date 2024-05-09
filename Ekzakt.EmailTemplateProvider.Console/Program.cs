@@ -7,7 +7,6 @@ using Ekzakt.Templates.Console.Utilities;
 using Ekzakt.FileManager.AzureBlob.Configuration;
 using Microsoft.Extensions.Azure;
 using Azure.Identity;
-using Ekzakt.FileManager.Core.Options;
 
 var services = new ServiceCollection();
 
@@ -64,7 +63,7 @@ IHost BuildHost(ServiceCollection serviceCollection)
                    clientBuilder
                        .UseCredential(new DefaultAzureCredential());
                    clientBuilder
-                       .AddBlobServiceClient(context.Configuration.GetSection(FileManagerOptions.SectionName).GetSection(AzureStorageOptions.SectionName));
+                       .AddBlobServiceClient(context.Configuration.GetSection("Azure:StorageBlobs"));
                    clientBuilder
                        .ConfigureDefaults(context.Configuration.GetSection("Azure:Defaults"));
                });

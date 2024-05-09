@@ -13,7 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ekzakt.Utilities" Version="0.2.25" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
@@ -28,14 +27,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Core\Ekzakt.EmailSender.Core.csproj" />
-	  <ProjectReference Include="..\..\Ekzakt.EmailSender\Ekzakt.EmailSender.Smtp\Ekzakt.EmailSender.Smtp.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="Ekzakt.Templates.Console.Utilities">
-	    <HintPath>..\..\Ekzakt.Templates\Ekzakt.Templates.Console.Utilities\bin\Debug\net8.0\Ekzakt.Templates.Console.Utilities.dll</HintPath>
-	  </Reference>
+		<Reference Include="Ekzakt.Templates.Console.Utilities">
+			<HintPath>..\..\Ekzakt.Templates\Ekzakt.Templates.Console.Utilities\bin\Debug\net8.0\Ekzakt.Templates.Console.Utilities.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 </Project>

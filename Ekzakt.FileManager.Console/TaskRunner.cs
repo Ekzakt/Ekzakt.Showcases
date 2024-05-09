@@ -1,16 +1,17 @@
 ﻿using Ekzakt.FileManager.Core.Contracts;
-using Ekzakt.FileManager.Core.Models;
+using Ekzakt.FileManager.Core.Models.EventArgs;
 using Ekzakt.FileManager.Core.Models.Requests;
 using Ekzakt.FileManager.Core.Models.Responses;
 using Ekzakt.Templates.Console.Utilities;
 using Ekzakt.Utilities.Extensions;
-using Ekzakt.Utilities.Helpers;
 using System.Net;
 
 namespace Ekzakt.FileManager.Console;
 
-public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
+public class TaskRunner(ConsoleHelpers c, IEkzaktFileManager fileManager)
 {
+    private const string BASE_LOCATION = "data";
+     
     public async Task SaveFileAsync(bool useChunks = false, bool useStream = false)
     {
         var progressHandler = new Progress<ProgressEventArgs>(progress =>
@@ -58,7 +59,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
             }
 
 
-            var containerName = "demo-blazor8";
+            var containerName = BASE_LOCATION;
             var path = Path.Combine(basePath, sourceFile);
 
             if (!useChunks)
@@ -110,7 +111,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new ListFilesRequest
             {
-                BaseLocation = "demo-blazor8",
+                //BaseLocation = BASE_LOCATION,
                 Paths = pathsList
             };
 
@@ -148,7 +149,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new DownloadSasTokenRequest
             {
-                BaseLocation = "demo-blazor8",
+                BaseLocation = BASE_LOCATION,
                 FileName = fileName
             };
 
@@ -187,7 +188,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new DeleteFileRequest
             {
-                BaseLocation = "demo-blazor8",
+                BaseLocation = BASE_LOCATION,
                 FileName = fileName
             };
 
@@ -227,7 +228,7 @@ public class TaskRunner(ConsoleHelpers c, IFileManager fileManager)
 
             var request = new ReadFileAsStringRequest
             {
-                BaseLocation = "demo-blazor8",
+                BaseLocation = BASE_LOCATION,
                 FileName = fileName
             };
 
